@@ -71,6 +71,7 @@ void move(int n, int source, int dest, int spare)
 
 int main()
 {
+    cout << "Enter the size of the tower: ";
     cin >> siz;
     for(int i = 0;i < siz;i++) {
         st[0][i] = siz - i;

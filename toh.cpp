@@ -7,6 +7,7 @@ using namespace std;
 int st[3][MAX];
 int top[3] = {-1,-1,-1};
 int siz;
+int no_digs;
 char ch[3] = {'A', 'B', 'C'};
 
 void push(int in, int item)
@@ -44,14 +45,22 @@ void print()
     clrscr();
     for (int i = siz;i >= 0;i--) {
         for (int j = 0;j < 3;j++) {
-            if(i <= top[j])
-                cout << st[j][i] << "  ";
-            else
-                cout << "   ";
+            if(i <= top[j]){
+                int no_rem = no_digs-to_string(st[j][i]).size();
+                string first_spaces(no_rem/2, ' ');
+                string second_spaces(no_rem/2+no_rem%2+2, ' ');
+                cout << first_spaces << st[j][i] << second_spaces;
+            }
+            else{
+                string spaces(no_digs+2, ' ');
+                cout << spaces;
+            }
         }
         cout << endl;
     }
-    cout << "A  B  C\n\n";
+    string first_spaces((no_digs-1)/2, ' ');
+    string second_spaces((no_digs-1)/2+(no_digs-1)%2+2, ' ');
+    cout << first_spaces << 'A' << second_spaces+first_spaces << 'B' << second_spaces+first_spaces << 'C' << "\n\n";
 }
 
 void move(int n, int source, int dest, int spare)
@@ -73,6 +82,7 @@ int main()
 {
     cout << "Enter the size of the tower: ";
     cin >> siz;
+    no_digs = to_string(siz).size();
     for(int i = 0;i < siz;i++) {
         st[0][i] = siz - i;
     }
